@@ -45,7 +45,7 @@ describe('Auth', () => {
 
   Object.keys(wrongPasswordUsers).forEach((user => {
     describe(user, () => {
-      it(`should return ${user} as user alias`, async () => {
+      it(`should return "Wrong user or password." for ${user}`, async () => {
         try {
           await auth.createOrAuthUser(wrongPasswordUsers[user])
         } catch (error) {
@@ -55,3 +55,4 @@ describe('Auth', () => {
     });
   }))
 });
+
