@@ -1,9 +1,9 @@
-## Node.js Mocha Test Boilerplate
+## Node.js SEA API TESTS
 
 #### Installation
 Install local dependencies
 ```
-npm i
+npm i or yarn
 ```
 
 #### Running unit test
