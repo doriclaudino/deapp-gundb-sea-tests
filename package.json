@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "chai": "4.1.2",
+    "gun": "^0.2019.627",
     "mocha": "3.5.0",
     "nodemon": "1.12.0"
   }
