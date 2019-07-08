@@ -20,7 +20,7 @@ describe('Sea', () => {
           //check if comming from user
           var msg = await SEA.verify(data, bostonPair.pub);
           var dec = await SEA.decrypt(msg, bostonPair);
-          dec.should.equal(messageToEncrypt)
+          expect(dec).to.be.equal(messageToEncrypt)
         });
       }))
     })
@@ -36,7 +36,7 @@ describe('Sea', () => {
           const messageToEncrypt = `Good Morning ${next}!`
           var enc = await SEA.encrypt(messageToEncrypt, await SEA.secret(chicagoPair.epub, bostonPair));
           var dec = await SEA.decrypt(enc, await SEA.secret(bostonPair.epub, chicagoPair));
-          dec.should.equal(messageToEncrypt)
+          expect(dec).to.be.equal(messageToEncrypt)
         });
       }))
     })
@@ -59,7 +59,7 @@ describe('Sea', () => {
           var msg = await SEA.verify(data, bostonPair.pub);
 
           var dec = await SEA.decrypt(msg, await SEA.secret(bostonPair.epub, chicagoPair));
-          dec.should.equal(messageToEncrypt)
+          expect(dec).to.be.equal(messageToEncrypt)
         });
       }))
     })
