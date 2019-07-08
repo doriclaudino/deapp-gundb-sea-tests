@@ -106,9 +106,9 @@ describe('Sea', () => {
           const chicagoPair = chicago.sea
           const messageToEncrypt = `Good Morning ${next}!`
           var enc = await SEA.encrypt(messageToEncrypt, await SEA.secret(chicagoPair.epub, bostonPair));
-
+          
           var data = await SEA.sign(enc, bostonPair);
-
+         
           //check if comming from boston
           var msg = await SEA.verify(data, bostonPair.pub);
 
@@ -118,8 +118,27 @@ describe('Sea', () => {
       }))
     })
 
-    /**
-     * handle not share informations
-     */
+    describe('Encrypt, Sign and NOT decrypt another user message', () => {
+      Object.keys(users).forEach(((user, index, array) => {
+        const next = index === array.length - 1 ? array[0] : array[index + 1]
+        it(`User ${user} should be NOT able to decrypt ${next} message`, async () => {
+          const boston = await auth.createOrAuthUser(users[next])
+          const chicago = await auth.createOrAuthUser(users[user])
+          const bostonPair = boston.sea
+          const chicagoPair = chicago.sea
+          const messageToEncrypt = `Good Morning ${next}!`
+
+
+          var enc = await SEA.encrypt(messageToEncrypt, bostonPair);
+          var data = await SEA.sign(enc, bostonPair);
+                   
+          //check if comming from boston
+          var msg = await SEA.verify(data, bostonPair.pub);
+
+          var dec = await SEA.decrypt(msg, await SEA.secret(bostonPair.epub, chicagoPair));
+          expect(dec).to.be.undefined
+        });
+      }))
+    })
   });
 });
