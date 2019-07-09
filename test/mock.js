@@ -15,5 +15,5 @@ const wrongPasswordUsers = {
 module.exports = {
   users,
   unExistusers,
-  wrongPasswordUsers
+  wrongPasswordUsers,
 }

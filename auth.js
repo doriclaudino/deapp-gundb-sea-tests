@@ -1,10 +1,9 @@
-var Gun = require('gun');
-var gun = Gun();
-require('gun/lib/then')
+const { gun } = require('./index')
 
 module.exports = {
-  createOrAuthUser: createOrAuthUser,
-  userExist: userExist,
+  createOrAuthUser,
+  userExist,
+  getPubKey
 }
 
 async function createOrAuthUser({ username, password }) {
@@ -40,4 +39,9 @@ function userExist(alias) {
         ack.put ? resolve(true) : resolve(false)
     })
   })
+}
+
+async function getPubKey(alias){
+   const publicUserObject = await gun.get(`~@${alias}`).then()
+   return  publicUserObject ? Object.keys(publicUserObject)[1].slice(1) : undefined
 }
